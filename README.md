@@ -42,4 +42,4 @@ Web Code Repo: [Link](https://github.com/slimpotatoboy/cashor_web)
 
 ## Demo Link
 
-Playstore Link: 
+Demo Link: [Download APK](https://cashor.vercel.app/download)
