@@ -2,7 +2,6 @@ import 'package:barcode_scan2/barcode_scan2.dart';
 import 'package:cashor_app/components/bgbutton.dart';
 import 'package:cashor_app/config/colors.dart';
 import 'package:cashor_app/config/styles.dart';
-import 'package:cashor_app/screens/src/cart/cart_screen.dart';
 import 'package:cashor_app/screens/src/create_business/views/create_business_screen.dart';
 import 'package:cashor_app/screens/src/home/views/home_screen.dart';
 import 'package:cashor_app/screens/src/more/views/more_screen.dart';
