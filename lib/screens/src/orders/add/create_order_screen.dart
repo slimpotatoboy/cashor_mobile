@@ -5,6 +5,7 @@ import 'package:cashor_app/components/single_scaffold.dart';
 import 'package:cashor_app/components/textfields.dart';
 import 'package:cashor_app/config/colors.dart';
 import 'package:cashor_app/config/styles.dart';
+import 'package:cashor_app/screens/src/manage_people/views/manage_people_screen.dart';
 import 'package:cashor_app/screens/src/orders/controller/orders_controller.dart';
 import 'package:cashor_app/services/cart_service.dart';
 import 'package:cashor_app/services/orders_service.dart';
@@ -54,6 +55,8 @@ class _CreateOrderScreenState extends State<CreateOrderScreen> {
     isLoading = false;
     if (customerList.isNotEmpty) {
       customerId = customerList[0].id;
+    } else {
+      customerId = "";
     }
     setState(() {});
   }
@@ -90,46 +93,53 @@ class _CreateOrderScreenState extends State<CreateOrderScreen> {
   }
 
   void onSubmitNewOrder(context) async {
-    setState(() {
-      isLoadingSubmit = true;
-    });
-    // for (var item in cartList) {
-    //   print(item.productId);
-    // }
-    final orders = await orderService.create(
-      orderStatus: selectedOrderStatus.toLowerCase(),
-      paymentMethod: selectedPayment,
-      note: noteController.text,
-      customerId: customerId,
-      totalPrice: cartList
-          .fold(0.0, (value, element) => value + element.totalPrice)
-          .toInt(),
-    );
-    if (orders != null) {
-      for (var item in cartList) {
-        await orderService.createOrderProducts(
-          orderId: orders.id,
-          productId: item.productId,
-          productName: item.productName,
-          quantity: item.quantity,
-          sellingPrice: item.sellingPrice,
-          totalPrice: item.totalPrice,
-        );
-        await cartService.delete(item.id);
+    if (customerId == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: warningColor,
+          content: Text("Please Add New Customer"),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } else {
+      setState(() {
+        isLoadingSubmit = true;
+      });
+      final orders = await orderService.create(
+        orderStatus: selectedOrderStatus.toLowerCase(),
+        paymentMethod: selectedPayment,
+        note: noteController.text,
+        customerId: customerId,
+        totalPrice: cartList
+            .fold(0.0, (value, element) => value + element.totalPrice)
+            .toInt(),
+      );
+      if (orders != null) {
+        for (var item in cartList) {
+          await orderService.createOrderProducts(
+            orderId: orders.id,
+            productId: item.productId,
+            productName: item.productName,
+            quantity: item.quantity,
+            sellingPrice: item.sellingPrice,
+            totalPrice: item.totalPrice,
+          );
+          await cartService.delete(item.id);
+        }
       }
-    }
-    isLoadingSubmit = false;
-    setState(() {});
-    await ordersController.fetchOrders();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        backgroundColor: greenColor,
-        content: Text("Order Created Successfully!"),
-        behavior: SnackBarBehavior.floating,
-      ),
-    );
+      isLoadingSubmit = false;
+      setState(() {});
+      await ordersController.fetchOrders();
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          backgroundColor: greenColor,
+          content: Text("Order Created Successfully!"),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
 
-    Get.back();
+      Get.back();
+    }
   }
 
   @override
@@ -194,18 +204,25 @@ class _CreateOrderScreenState extends State<CreateOrderScreen> {
                               style: boldStyle,
                             ),
                             const SizedBox(height: 10),
-                            CustomDropdown(
-                              valueText: customerId,
-                              allList: customerList.map<DropdownMenuItem>(
-                                (item) {
-                                  return DropdownMenuItem(
-                                    value: item.id,
-                                    child: Text(item.name),
-                                  );
-                                },
-                              ).toList(),
-                              onChange: onChangeCustomer,
-                            ),
+                            if (customerList.isNotEmpty)
+                              CustomDropdown(
+                                valueText: customerId,
+                                allList: customerList.map<DropdownMenuItem>(
+                                  (item) {
+                                    return DropdownMenuItem(
+                                      value: item.id,
+                                      child: Text(item.name),
+                                    );
+                                  },
+                                ).toList(),
+                                onChange: onChangeCustomer,
+                              ),
+                            if (customerList.isEmpty)
+                              PrimaryButton(
+                                  label: "Add Customer",
+                                  onPress: () {
+                                    Get.to(() => const ManagePeopleScreen());
+                                  }),
                             const SizedBox(height: 20),
                             const Text(
                               "Order Details",
