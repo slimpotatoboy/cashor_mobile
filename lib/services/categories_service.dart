@@ -11,6 +11,7 @@ class CategoriesService {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // fetch all the categories
   Future fetch() async {
     try {
       final categoriesList = await _databases.listDocuments(

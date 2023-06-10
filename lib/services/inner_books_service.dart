@@ -11,6 +11,7 @@ class InnerBooksService {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create inner books
   Future create({
     required String booksId,
     required String remarks,
@@ -35,6 +36,7 @@ class InnerBooksService {
     return true;
   }
 
+  // fetch all the data of inner book
   Future fetch(booksId) async {
     try {
       final innerBooksList = await _databases.listDocuments(

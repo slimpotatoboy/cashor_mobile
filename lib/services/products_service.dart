@@ -12,6 +12,7 @@ class ProductsService {
   final storage = GetStorage();
   final appwriteStorage = Storage(Appwrite.instance.client);
 
+  // store image of products
   Future storeImage(fileName, status) async {
     final file = await appwriteStorage.createFile(
       bucketId: constants.productFileStorageId,
@@ -27,6 +28,7 @@ class ProductsService {
     return file.$id;
   }
 
+  //delete single image
   Future deleteImage(fileId) async {
     await appwriteStorage.deleteFile(
       bucketId: constants.productFileStorageId,
@@ -36,6 +38,7 @@ class ProductsService {
     return true;
   }
 
+  // create new product
   Future create({
     required String name,
     String? description,
@@ -84,6 +87,7 @@ class ProductsService {
     }
   }
 
+  // fetch products
   Future fetch() async {
     try {
       final productsList = await _databases.listDocuments(
@@ -110,6 +114,7 @@ class ProductsService {
     }
   }
 
+  // update products
   Future udpate({
     required String id,
     required String name,
@@ -147,6 +152,7 @@ class ProductsService {
     }
   }
 
+  // get single product
   Future get(String id) async {
     try {
       final productsList = await _databases.getDocument(

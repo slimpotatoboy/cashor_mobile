@@ -12,6 +12,7 @@ class PeopleServices {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create new customer or supplier
   Future create({
     required String name,
     required String phone,
@@ -37,6 +38,7 @@ class PeopleServices {
     return true;
   }
 
+  // fetch customer or suppliers according to the type
   Future fetch({String? type}) async {
     try {
       final peopleList = await _databases.listDocuments(
@@ -66,6 +68,7 @@ class PeopleServices {
     }
   }
 
+  // update customer or supplier
   Future udpate(
       {required String id,
       required dynamic bookNetBalance,
@@ -89,6 +92,7 @@ class PeopleServices {
     }
   }
 
+  // get single details
   Future get(String id) async {
     try {
       final booksList = await _databases.getDocument(

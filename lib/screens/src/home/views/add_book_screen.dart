@@ -14,11 +14,13 @@ class AddBookScreen extends StatefulWidget {
 }
 
 class _AddBookScreenState extends State<AddBookScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController addbookController = TextEditingController();
   final booksService = BooksService();
+  final TextEditingController addbookController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
 
+  // when user press add book
   void onAddBook(context) async {
     setState(() {
       isLoading = true;

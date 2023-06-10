@@ -10,7 +10,6 @@ import 'package:cashor_app/services/business_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:cashor_app/config/constants.dart' as constants;
 
 class BusinessSettingsScreen extends StatefulWidget {
   const BusinessSettingsScreen({super.key});

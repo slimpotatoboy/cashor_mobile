@@ -1,10 +1,8 @@
 import 'package:cashor_app/components/bgbutton.dart';
 import 'package:cashor_app/components/single_scaffold.dart';
 import 'package:cashor_app/components/textfields.dart';
-import 'package:cashor_app/config/colors.dart';
 import 'package:cashor_app/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});

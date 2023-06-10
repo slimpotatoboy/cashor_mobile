@@ -11,6 +11,7 @@ class CartService {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create new cart data
   Future create({
     required String productId,
     required String productName,
@@ -35,6 +36,7 @@ class CartService {
     return true;
   }
 
+  // fetch all the carts realted to that business
   Future fetch() async {
     try {
       final cartList = await _databases.listDocuments(
@@ -55,6 +57,7 @@ class CartService {
     }
   }
 
+  // update cart quantity and price
   Future udpate({
     required String id,
     required int quantity,
@@ -77,6 +80,7 @@ class CartService {
     }
   }
 
+  // delete single cart item
   Future delete(String id) async {
     try {
       await _databases.deleteDocument(

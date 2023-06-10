@@ -6,7 +6,6 @@ import 'package:cashor_app/screens/src/home/controller/home_controller.dart';
 import 'package:cashor_app/screens/src/home/views/add_book_screen.dart';
 import 'package:cashor_app/screens/src/home/views/single_book_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -21,15 +20,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final storage = GetStorage();
+  // home controller
   final HomeController homeController = Get.put(HomeController());
-
-  // List books = [];
   bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
     getAllBooks();
+    // listen to businessId
     storage.listenKey('businessId', (value) {
       getAllBooks();
     });
@@ -42,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
     await homeController.getBooks();
     setState(() {
       isLoading = false;
-      // books = result;
     });
   }
 
@@ -174,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SmallIconButton(
               label: "Add",
               onPressed: () async {
-                final result = await Get.to(() => AddBookScreen());
+                final result = await Get.to(() => const AddBookScreen());
                 if (result != null) {
                   onRefresh();
                 }

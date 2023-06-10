@@ -62,6 +62,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ],
                       ),
                     ),
+                    // Appwrite Logo
                     SvgPicture.asset(
                       'assets/images/appwrite-pink.svg',
                       width: 80,

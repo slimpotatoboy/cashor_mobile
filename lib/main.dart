@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:cashor_app/config/constants.dart' as constants;
 
 void main() async {
+  // get storage initialization
   await GetStorage.init();
   runApp(const MyApp());
 }
@@ -16,9 +17,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Initializing the discord logger to log the errors from Appwrite SDK to my discord server
     DiscordLogger(
       channelId: constants.discordChannelId,
       botToken: constants.botToken,

@@ -6,11 +6,14 @@ import 'package:cashor_app/config/constants.dart' as constants;
 import 'package:cashor_app/services/auth_service.dart';
 import 'package:get_storage/get_storage.dart';
 
+// related to books database
+
 class BooksService {
   final Databases _databases = Databases(Appwrite.instance.client);
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create new book
   Future create({required String bookName}) async {
     var id = ID.unique();
     await _databases.createDocument(
@@ -29,6 +32,7 @@ class BooksService {
     return true;
   }
 
+  // fetch all the books
   Future fetch() async {
     final userId = await authService.getAccountId();
     try {
@@ -53,6 +57,7 @@ class BooksService {
     }
   }
 
+  // update single book
   Future udpate(
       {required String id,
       required dynamic bookNetBalance,
@@ -75,6 +80,7 @@ class BooksService {
     }
   }
 
+  // fetch single book
   Future get(String id) async {
     final userId = await authService.getAccountId();
     try {

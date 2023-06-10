@@ -6,7 +6,6 @@ import 'package:cashor_app/screens/src/orders/add/create_order_screen.dart';
 import 'package:cashor_app/screens/src/orders/controller/orders_controller.dart';
 import 'package:cashor_app/screens/src/orders/single/single_order_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -175,7 +174,7 @@ class _OrderScreenState extends State<OrderScreen> {
             SmallIconButton(
               label: "Create",
               onPressed: () async {
-                final result = await Get.to(() => CreateOrderScreen());
+                final result = await Get.to(() => const CreateOrderScreen());
                 if (result != null) {
                   onRefresh();
                 }

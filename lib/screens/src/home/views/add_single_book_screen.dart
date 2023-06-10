@@ -45,11 +45,13 @@ class _AddSingleBookScreenState extends State<AddSingleBookScreen> {
   @override
   void initState() {
     super.initState();
+    // select cash
     selectedCategory = widget.category == "Cash In"
         ? AmountCategory.cashIn
         : AmountCategory.cashOut;
   }
 
+  // on book update
   void onBookUpdate(
       {required dynamic netBalance,
       required dynamic netCashIn,
@@ -63,6 +65,7 @@ class _AddSingleBookScreenState extends State<AddSingleBookScreen> {
     );
   }
 
+  // on add book entry
   void onAddBookEntry(context) async {
     setState(() {
       isLoading = true;

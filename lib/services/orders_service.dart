@@ -12,6 +12,7 @@ class OrdersService {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create new order
   Future create({
     required String orderStatus,
     required String paymentMethod,
@@ -37,6 +38,7 @@ class OrdersService {
     return Orders.fromMap(orders.data);
   }
 
+  // fetch orders
   Future fetch() async {
     try {
       final ordersList = await _databases.listDocuments(
@@ -57,29 +59,7 @@ class OrdersService {
     }
   }
 
-  Future udpate(
-      {required String id,
-      required dynamic bookNetBalance,
-      required dynamic totalCashIn,
-      required dynamic totalCashOut}) async {
-    try {
-      await _databases.updateDocument(
-        databaseId: constants.appwriteDatabaseId,
-        collectionId: constants.booksCollectionId,
-        documentId: id,
-        data: {
-          "book_net_balance": bookNetBalance,
-          "total_cash_in": totalCashIn,
-          "total_cash_out": totalCashOut,
-        },
-      );
-      return true;
-    } on AppwriteException catch (e) {
-      DiscordLog()
-          .log("Order update business_id: ${storage.read("businessId")}: $e ");
-    }
-  }
-
+  // get single order details
   Future get(String id) async {
     try {
       final booksList = await _databases.getDocument(
@@ -100,6 +80,7 @@ class OrdersService {
     }
   }
 
+  // fetch order products
   Future fetchOrderProduct(String orderId) async {
     try {
       final productList = await _databases.listDocuments(
@@ -122,6 +103,7 @@ class OrdersService {
     }
   }
 
+  // create new order products
   Future createOrderProducts({
     required String orderId,
     required String productId,
@@ -148,6 +130,7 @@ class OrdersService {
     return true;
   }
 
+  // update order status
   Future updateOrderStatus({
     required String id,
     required String orderStatus,

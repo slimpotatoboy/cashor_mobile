@@ -9,7 +9,6 @@ import 'package:cashor_app/screens/src/products_list/single/single_product_scree
 import 'package:cashor_app/services/cart_service.dart';
 import 'package:cashor_app/services/products_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:timeago/timeago.dart' as timeago;

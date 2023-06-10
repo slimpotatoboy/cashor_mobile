@@ -5,6 +5,7 @@ class HomeController extends GetxController {
   final booksService = BooksService();
   List books = [];
 
+  // home controller to get books
   Future getBooks() async {
     final result = await booksService.fetch();
     if (result != null) {

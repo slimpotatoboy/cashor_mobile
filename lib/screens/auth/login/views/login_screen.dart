@@ -19,22 +19,25 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final authService = AuthService();
 
-  /// object of [TextEditingController] for phone and password text field
+  /// object of [TextEditingController] for email and password text field
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
 
+  // formkey
   final _formKey = GlobalKey<FormState>();
 
+  // show/hide the password on eye click
   final bool isObscure = false;
-
+  // loading state
   bool isLoading = false;
 
+  // when user press login button
   void onLoginSubmit() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         isLoading = true;
       });
+      // appwrite sdk for login in the service
       final result = await authService.login(
         email: emailController.text,
         password: passwordController.text,
@@ -42,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         isLoading = false;
       });
+      // when login is successful
       if (result != null) {
         emailController.clear();
         passwordController.clear();
@@ -72,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        // Cashor Logo
                         Image.asset(
                           "assets/images/logo11.png",
                           width: 150,
@@ -150,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             InkWell(
                               onTap: () {
                                 Get.to(
-                                  () => RegisterScreen(),
+                                  () => const RegisterScreen(),
                                   duration: const Duration(milliseconds: 400),
                                   transition: Transition.rightToLeft,
                                 );

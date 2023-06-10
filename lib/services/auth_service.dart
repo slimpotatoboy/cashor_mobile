@@ -6,6 +6,8 @@ import 'package:get_storage/get_storage.dart';
 class AuthService {
   final Account _account = Account(Appwrite.instance.client);
   final storage = GetStorage();
+
+  // user signup
   Future signUp(
       {String? name, required String email, required String password}) async {
     try {
@@ -27,6 +29,7 @@ class AuthService {
     }
   }
 
+  // user login
   Future login({required String email, required String password}) async {
     try {
       await _account.createEmailSession(
@@ -37,6 +40,7 @@ class AuthService {
       storage.write('userId', session.$id);
       return session;
     } on AppwriteException catch (e) {
+      // exception
       Get.showSnackbar(
         GetSnackBar(
           title: "${e.code}",
@@ -47,25 +51,30 @@ class AuthService {
     }
   }
 
+  // user logout
   Future<void> logout() {
     return _account.deleteSession(sessionId: 'current');
   }
 
+  // get the user id
   Future getAccountId() async {
     final session = await _account.get();
     return session.$id;
   }
 
+  // get user details
   Future getUser() async {
     final session = await _account.get();
     return session;
   }
 
+  // when user updates their username
   Future updateName(String name) async {
     final result = await _account.updateName(name: name);
     return result;
   }
 
+  // update password
   Future updatePassword(
       {required String oldPassword, required String newPassword}) async {
     try {

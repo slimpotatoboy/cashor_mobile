@@ -17,6 +17,8 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final authService = AuthService();
+
+  /// object of [TextEditingController] for name, email, password and confirm password text field
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -24,13 +26,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+
+  // show/hide the password on eye click
   final bool isObscure = false;
+  // show/hide the confirm password on eye click
   final bool isObscureConfirm = false;
+  // check terms and conditions
   bool isChecked = false;
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    // get color
     Color getColor(Set<MaterialState> states) {
       const Set<MaterialState> interactiveStates = <MaterialState>{
         MaterialState.pressed,

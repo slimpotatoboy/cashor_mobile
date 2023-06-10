@@ -107,7 +107,7 @@ class _SingleBookScreenState extends State<SingleBookScreen> {
                     child: Column(
                       children: [
                         if (innerBooks.isEmpty)
-                          Text(
+                          const Text(
                             "Try adding your first entry",
                             style: titleStyle,
                           ),
@@ -216,7 +216,7 @@ class _SingleBookScreenState extends State<SingleBookScreen> {
                     color: accentColor,
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Orders",
                     style: TextStyle(
                       color: primaryColor,

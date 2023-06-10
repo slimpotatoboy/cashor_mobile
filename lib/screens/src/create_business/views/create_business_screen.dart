@@ -18,7 +18,7 @@ class CreateBusinessScreen extends StatefulWidget {
 class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
   final authService = AuthService();
 
-  /// object of [TextEditingController] for phone and password text field
+  /// object of [TextEditingController] for name, registration, email, phone, bank account text field
   final TextEditingController nameController = TextEditingController();
   final TextEditingController registrationNumberController =
       TextEditingController();
@@ -26,12 +26,14 @@ class _CreateBusinessScreenState extends State<CreateBusinessScreen> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController bankAccountController = TextEditingController();
 
+  // business service
   final businessService = BusinessService();
 
   final _formKey = GlobalKey<FormState>();
 
   bool isLoading = false;
 
+  // when user press create new business
   void createBusiness(context) async {
     setState(() {
       isLoading = true;

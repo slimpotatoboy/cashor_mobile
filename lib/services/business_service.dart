@@ -11,6 +11,7 @@ class BusinessService {
   final authService = AuthService();
   final storage = GetStorage();
 
+  // create a new business
   Future create({
     required String name,
     required String registrationNumber,
@@ -36,6 +37,7 @@ class BusinessService {
     return true;
   }
 
+  // fetch all the business related to specific user
   Future fetch() async {
     final userId = await authService.getAccountId();
     try {
@@ -57,6 +59,7 @@ class BusinessService {
     }
   }
 
+  // update permisson of the current business
   Future updatePermission({required bool status}) async {
     await _databases.updateDocument(
         databaseId: constants.appwriteDatabaseId,
@@ -68,6 +71,7 @@ class BusinessService {
     return true;
   }
 
+  // /get current business details
   Future get() async {
     try {
       final businessList = await _databases.getDocument(
@@ -82,6 +86,7 @@ class BusinessService {
     }
   }
 
+  // update current business details
   Future update({
     required String name,
     required String registrationNumber,
